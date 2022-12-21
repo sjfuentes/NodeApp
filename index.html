@@ -1,1 +1,84 @@
-<p>Hola Mundo</p>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Cloud league demo project</title>
+    <base href="/">
+</head>
+
+<body>
+    <h1>Cloud league demo project</h1>
+    <div style="display: flex;">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name">
+        </div>
+        <div style="padding-left: 5px;">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname">
+        </div>
+    </div>
+    <p id="user">Loading button click data.</p>
+    <button id="add-user">Add user</button>
+    <button id="show-user">Show user</button>
+
+
+
+</body>
+<script >
+    console.log('Client-side code running');
+    
+    const inputName = document.getElementById("name");
+    const inputLastName = document.getElementById("lastname");
+
+        const button = document.getElementById('add-user');
+        button.addEventListener('click', function (e) {
+            console.log('button was clicked');
+            console.log(name.value);
+            fetch('/clicked', { method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user:{
+                        name: inputName,
+                        lastname: inputLastName
+                }
+                    })
+                })
+                .then(function (request, response) {
+                    if (response.ok) {
+                        console.log('Click was recorded');
+                        return;
+                    }
+                    throw new Error('Request failed.');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        const button1 = document.getElementById('show-user');
+        button1.addEventListener('click', function (e) {
+
+                fetch('/clicks', { method: 'GET' })
+                    .then(function (response) {
+                        if (response.ok){
+                            console.log("estos son los resultados: " + result);
+                        }
+                        throw new Error('Request failed.');
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        document.getElementById('user').innerHTML = `My name is ${data.recordSet}`;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+        });
+    
+
+</script>
+
+</html>
