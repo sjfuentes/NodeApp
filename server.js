@@ -5,8 +5,9 @@ const express = require('express');
 const sql = require('mssql');
 const app = express();
 
+
 // serve files from the public directory
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -24,14 +25,28 @@ app.get('/', (req, res) => {
 });
 
 app.post('/clicked', (req, res) => { 
-    console.log(JSON.stringify(req.body.user));
-    addUser();
+    addUser(req.body.user);
     res.sendStatus(201);
 })
 
 app.get('/clicks', (req, res) => {
-    var result = getUsers()
-    res.send(result)
+    var results1 = []
+    async function info() {
+        var conection = await sql.connect(config);
+        await conection.request().query('SELECT * FROM users;',
+            function (err, results, fields) {
+                if (err) throw err;
+                else {
+                    console.log('Selected ' + results.recordset.length + ' row(s).');
+                }
+                results.recordset.forEach(element => {
+                    results1.push(element.name)
+                });
+                console.log('Done.');
+            })
+    }
+    info()
+        res.send(results1)
   });
 
 const config = {
@@ -68,11 +83,11 @@ async function queryDB(poolConnection) {
 
 }
 
-async function addUser(){ 
+async function addUser(user){ 
     var conection = await sql.connect(config);
     //await conection.request().query('INSERT INTO users(name,lastname) VALUES (\'name\', \'lastname\');',
-    const name = "Santiago";
-    const lastname = "Fuentes";    
+    const name = user.name;
+    const lastname = user.lastname;    
     var sql1 = `INSERT INTO users(name,lastname) VALUES (\'${name}\',\'${lastname}\');`
     await conection.request().query(sql1,
         function (err, results, fields) {
@@ -80,18 +95,4 @@ async function addUser(){
         else console.log('Inserted ' + results.affectedRows + ' row(s).');
         })
 
-}
-
-async function getUsers() { 
-    var conection = await sql.connect(config);
-    var resultSet = await conection.request().query('SELECT * FROM [dbo].[users];',
-        function(err, results, fields) {
-            if (err) throw err;
-            else console.log('Selected ' + results.length + ' row(s).');
-            for (i = 0; i < results.length; i++) {
-                console.log('Row: ' + JSON.stringify(results[i]));
-            }
-            console.log('Done.');
-        })
-    //return resultSet;
 }
