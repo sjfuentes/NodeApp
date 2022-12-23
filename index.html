@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet" href="style.css">
 <head>
     <meta charset="utf-8">
     <title>Cloud league demo project</title>
@@ -9,24 +9,24 @@
 
 <body>
     <h1>Cloud league demo project</h1>
-    <div style="display: flex;">
-        <div>
-            <label for="name">Name</label>
-            <input type="text" id="name">
+    <div class="row">
+        <div class="column">
+            <div style="display: flex;">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                </div>
+                <div style="padding-left: 5px;">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname">
+                </div>
+            </div>
+            <button id="add-user">Add user</button>
         </div>
-        <div style="padding-left: 5px;">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname">
+        <div class="column">
+            <button id="show-user">Show user</button>       
+            <ul id="users"></ul>
         </div>
-    </div>
-    <ul id="users">
-        <li></li>
-    </ul>
-    <button id="add-user">Add user</button>
-    <!-- <button id="show-user">Show user</button> -->
-
-
-
 </body>
 <script src="client.js"> 
 </script>
