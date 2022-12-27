@@ -41,6 +41,8 @@ jobs:
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            allow-no-subscriptions: true
             dns-name-label: cloud-league.eastus.azurecontainer.io
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:${{ github.sha }}
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
