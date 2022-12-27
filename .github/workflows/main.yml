@@ -19,13 +19,8 @@ jobs:
             client-id: ${{ secrets.AZURE_CLIENT_ID }}
             tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            #allow-no-subscriptions: true
-        - name: 'Run az commands'
-          run: |
-            az account show
-            az group list
-            pwd 
-            
+            allow-no-subscriptions: true
+
         - name: Azure CLI script
           uses: azure/CLI@v1
           with:
@@ -42,14 +37,3 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:${{ github.sha }}
 
-        - name: 'Deploy to Azure Container Instances'
-          uses: 'azure/aci-deploy@v1'
-          with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: cloud-league.eastus.azurecontainer.io
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:${{ github.sha }}
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            name: containerGroup
-            location: 'east us'
