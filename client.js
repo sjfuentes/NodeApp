@@ -26,23 +26,20 @@ console.log('Client-side code running');
         button1.addEventListener('click', function (e) {
             fetch('/clicks', { method: 'GET' })
             .then((response) => {
-    // Our handler throws an error if the request did not succeed.
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    return response.text();
-  })
-                .then((text) => { 
-                    console.log(JSON.parse(text).recordset)
-                    let data = JSON.parse(text).recordset
-                    var list = document.createElement("ul");
-                    for (let i of data) {
-                    let item = document.createElement("li");
-                    item.innerHTML = `${i.name} ${i.lastname}` ;
-                    list.appendChild(item);
-                    }
-                    
-                    document.getElementById("users").appendChild(list);
-                })
-  .catch((error) => console.log("error"));
+                if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then((text) => { 
+                let data = JSON.parse(text).recordset
+                var list = document.createElement("ul");
+                for (let i of data) {
+                let item = document.createElement("li");
+                item.innerHTML = `${i.name} ${i.lastname}` ;
+                list.appendChild(item);
+                }                 
+                document.getElementById("users").appendChild(list);
+            })
+            .catch((error) => console.log("error"));
         });

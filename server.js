@@ -27,29 +27,17 @@ app.get('/', (req, res) => {
 app.post('/clicked', (req, res) => { 
     addUser(req.body.user);
     res.sendStatus(200);
-    //res.send("ok")
 })
 
 app.get('/clicks', (req, res) => {
-    var results1 = []
     async function info() {
         var conection = await sql.connect(config);
         await conection.request().query('SELECT * FROM users;',
             function (err, results, fields) {
-                // if (err) throw err;
-                // else {
-                //     console.log('Selected ' + results.recordset.length + ' row(s).');
-                // }
-                // results.recordset.forEach(element => {
-                //     results1.push(element.name)
-                // });
-                //console.log(results.recordset);
                 res.send(results)
-                //console.log('Done.');
             })
     }
     info()
-        //res.send(results1)
   });
 
 const config = {
