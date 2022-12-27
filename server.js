@@ -41,8 +41,8 @@ app.get('/clicks', (req, res) => {
   });
 
 const config = {
-    user: '4dm1n157r470r', // better stored in an app setting such as process.env.DB_USER
-    password: '4-v3ry-53cr37-p455w0rd', // better stored in an app setting such as process.env.DB_PASSWORD
+    user: '', // better stored in an app setting such as process.env.DB_USER
+    password: '', // better stored in an app setting such as process.env.DB_PASSWORD
     server: 'app-db-server1256.database.windows.net', // better stored in an app setting such as process.env.DB_SERVER
     port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
     database: 'app-db', // better stored in an app setting such as process.env.DB_NAME
