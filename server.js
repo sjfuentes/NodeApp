@@ -45,7 +45,7 @@ const config = {
     password: process.env.DB_password, // better stored in an app setting such as process.env.DB_PASSWORD
     server: process.env.DB_server, // better stored in an app setting such as process.env.DB_SERVER
     port: 1433, // optional, defaults to 1433, better stored in an app setting such as process.env.DB_PORT
-    database: 'app-db', // better stored in an app setting such as process.env.DB_NAME
+    database: process.env.DB_name, // better stored in an app setting such as process.env.DB_NAME
     authentication: {
         type: 'default'
     },
