@@ -5,8 +5,6 @@ console.log('Client-side code running');
             let inputName = document.getElementById("name").value;
             let inputLastName = document.getElementById("lastname").value;
             console.log('button was clicked');
-            console.log(inputName);
-            console.log(inputLastName);
             fetch('/clicked', { method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'
