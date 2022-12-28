@@ -28,18 +28,18 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
 
-        - name: 'Deploy to Azure Container Instances'
-          uses: 'azure/aci-deploy@v1'
-          with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: cloud-league
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            environment-variables: DB_user=4dm1n157r470r DB_password=4-v3ry-53cr37-p455w0rd DB_server=app-db-server1256.database.windows.net DB_name=app-db
-            name: cl-container-group
-            location: 'east us'
-            ports: 8080
+        # - name: 'Deploy to Azure Container Instances'
+        #   uses: 'azure/aci-deploy@v1'
+        #   with:
+        #     resource-group: ${{ secrets.RESOURCE_GROUP }}
+        #     dns-name-label: cloud-league
+        #     image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
+        #     registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        #     registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        #     registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        #     environment-variables: DB_user=4dm1n157r470r DB_password=4-v3ry-53cr37-p455w0rd DB_server=app-db-server1256.database.windows.net DB_name=app-db
+        #     name: cl-container-group
+        #     location: 'east us'
+        #     ports: 8080
             
 
