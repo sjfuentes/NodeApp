@@ -25,8 +25,8 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:latest
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:prueba
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/node-app:prueba
 
     deploy:
       runs-on: ubuntu-latest
@@ -45,5 +45,5 @@ jobs:
             inlineScript: |
               az config set extension.use_dynamic_install=yes_without_prompt
               az containerapp registry set -n cloud-league-app -g cloudLeagueResourceGroup --server cloudleaguecr.azurecr.io --username  ${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }}
-              az containerapp update -n cloud-league-app -g cloudLeagueResourceGroup --image cloudleaguecr.azurecr.io/node-app:latest
+              az containerapp update -n cloud-league-app -g cloudLeagueResourceGroup --image cloudleaguecr.azurecr.io/node-app:prueba
 
