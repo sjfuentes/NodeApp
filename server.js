@@ -3,6 +3,8 @@ console.log('Server-side code running');
 const bodyParser = require('body-parser');
 const express = require('express');
 const sql = require('mssql');
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') })
 const app = express();
 
 

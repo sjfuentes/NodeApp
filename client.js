@@ -31,7 +31,7 @@ console.log('Client-side code running');
             })
             .then((text) => { 
                 let data = JSON.parse(text).recordset
-                var list = document.getElementById("ul");
+                var list = document.createElement("ul");
                 for (let i of data) {
                 let item = document.createElement("li");
                 item.innerHTML = `${i.name} ${i.lastname}` ;
